@@ -1,0 +1,71 @@
+
+ <div class="input-group input-group-sm">
+
+  <div class="input-group-btn">
+    <button type="button" class="btn btn-default dropdown-toggle" [ngClass] = "(showList ? 'show' : '')"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="toggleDropdown()">
+        +<span class="country-code">{{ selectedCountryCode }}</span>
+        <i class="fa fa-caret-down"></i>
+    </button>
+
+    <ul class="dropdown-menu" [ngClass] = "(showList ? 'show' : '')">
+      <li *ngFor="let country of countries">
+        <a href="#" (click)="selectCountry(country)">
+          <div class="flag flag-{{country.code}}"></div>
+          <span>{{country.name}} (+{{country.cc}})</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+  <input type="tel" class="form-control" placeholder="555-666-7777"
+      (keyup)="changeNumber($event)">
+</div>
+
+
+<!-- <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      +<span class="country-code">{{ selectedCountryCode }}</span>
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div role="separator" class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </div>
+  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+</div> -->
+
+<!-- <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div role="separator" class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </div>
+  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+</div>
+
+<div class="input-group">
+  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div role="separator" class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,15 @@
+ <!-- Audio Controls -->
+ <div class="controls">
+  <button class="btn btn-circle"
+      [ngClass]="{'btn-danger': onPhone, 'btn-success': !onPhone}"
+      (click)="clickCall()">
+      <!-- [disabled]="disabled" -->
+    <i class="fa fa-fw"
+        [ngClass]="{'fa-close': onPhone, 'fa-phone': !onPhone}"></i>
+  </button>
+  <button class="btn btn-circle btn-default"
+      *ngIf="onPhone" (click)="clickMute()">
+    <i class="fa fa-fw"
+        [ngClass]="{'fa-microphone-slash': muted, 'fa-microphone': !muted}"></i>
+  </button>
+</div>
