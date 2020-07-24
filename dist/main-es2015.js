@@ -153,7 +153,21 @@ class AppComponent {
         //   </div>
         // </div>;
         chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-            chrome.tabs.executeScript(tabs[0].id, { code: 'document.body.innerHTML += "<div>My new content</div>"' }
+            chrome.tabs.executeScript(
+            // tabs[0].id, {code: `document.body.innerHTML +=  confirm("Incoming Call");`}
+            tabs[0].id, { code: `document.body.innerHTML +=   '<div class="commonPopUp" id="callingPopUp active">
+        <div class="popOverlay"></div>
+        <div class="popHolder confirmPopup">
+          <div class="closePopUp><span class="icon-cancel"></span></div>
+          <h3>Are you sure you want to remove all selections?</h3>
+          <div class="footerButton">
+            <button class="cancleButton>Cancel</button>
+            <button class="doneButton">
+              OK
+            </button>
+          </div>
+        </div>
+      </div>'` }
             // { code: 'document.body.innerHTML +=' + '<img src="https://cdn.pixabay.com/photo/2015/02/24/15/41/dog-647528__340.jpg" alt="Girl in a jacket" width="500" height="600">' }
             //  +
             // `<div class="commonPopUp" id="callingPopUp active">
@@ -530,6 +544,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _homepage_homepage_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./homepage/homepage.component */ "./src/app/homepage/homepage.component.ts");
 /* harmony import */ var _event_page_event_page_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./event-page/event-page.component */ "./src/app/event-page/event-page.component.ts");
 /* harmony import */ var _popup_popup_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./popup/popup.component */ "./src/app/popup/popup.component.ts");
+/* harmony import */ var _dialer_input_dialer_input_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dialer-input/dialer-input.component */ "./src/app/dialer-input/dialer-input.component.ts");
+/* harmony import */ var _audio_controls_audio_controls_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./audio-controls/audio-controls.component */ "./src/app/audio-controls/audio-controls.component.ts");
+/* harmony import */ var _dialpad_dialpad_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./dialpad/dialpad.component */ "./src/app/dialpad/dialpad.component.ts");
+/* harmony import */ var _statuslog_statuslog_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./statuslog/statuslog.component */ "./src/app/statuslog/statuslog.component.ts");
+
+
+
+
 
 
 
@@ -548,7 +570,11 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
         _homepage_homepage_component__WEBPACK_IMPORTED_MODULE_4__["HomepageComponent"],
         _event_page_event_page_component__WEBPACK_IMPORTED_MODULE_5__["EventPageComponent"],
-        _popup_popup_component__WEBPACK_IMPORTED_MODULE_6__["PopupComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+        _popup_popup_component__WEBPACK_IMPORTED_MODULE_6__["PopupComponent"],
+        _dialer_input_dialer_input_component__WEBPACK_IMPORTED_MODULE_7__["DialerInputComponent"],
+        _audio_controls_audio_controls_component__WEBPACK_IMPORTED_MODULE_8__["AudioControlsComponent"],
+        _dialpad_dialpad_component__WEBPACK_IMPORTED_MODULE_9__["DialpadComponent"],
+        _statuslog_statuslog_component__WEBPACK_IMPORTED_MODULE_10__["StatuslogComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AppModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
@@ -557,7 +583,11 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                     _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
                     _homepage_homepage_component__WEBPACK_IMPORTED_MODULE_4__["HomepageComponent"],
                     _event_page_event_page_component__WEBPACK_IMPORTED_MODULE_5__["EventPageComponent"],
-                    _popup_popup_component__WEBPACK_IMPORTED_MODULE_6__["PopupComponent"]
+                    _popup_popup_component__WEBPACK_IMPORTED_MODULE_6__["PopupComponent"],
+                    _dialer_input_dialer_input_component__WEBPACK_IMPORTED_MODULE_7__["DialerInputComponent"],
+                    _audio_controls_audio_controls_component__WEBPACK_IMPORTED_MODULE_8__["AudioControlsComponent"],
+                    _dialpad_dialpad_component__WEBPACK_IMPORTED_MODULE_9__["DialpadComponent"],
+                    _statuslog_statuslog_component__WEBPACK_IMPORTED_MODULE_10__["StatuslogComponent"]
                 ],
                 imports: [
                     _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -567,6 +597,306 @@ AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector
                 bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
             }]
     }], null, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/audio-controls/audio-controls.component.ts":
+/*!************************************************************!*\
+  !*** ./src/app/audio-controls/audio-controls.component.ts ***!
+  \************************************************************/
+/*! exports provided: AudioControlsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AudioControlsComponent", function() { return AudioControlsComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+
+
+
+const _c0 = function (a0, a1) { return { "fa-microphone-slash": a0, "fa-microphone": a1 }; };
+function AudioControlsComponent_button_3_Template(rf, ctx) { if (rf & 1) {
+    const _r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AudioControlsComponent_button_3_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r2); const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r1.clickMute(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "i", 2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](1, _c0, ctx_r0.muted, !ctx_r0.muted));
+} }
+const _c1 = function (a0, a1) { return { "btn-danger": a0, "btn-success": a1 }; };
+const _c2 = function (a0, a1) { return { "fa-close": a0, "fa-phone": a1 }; };
+class AudioControlsComponent {
+    constructor() {
+        this.onClickCall = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.onClickMute = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    ngOnInit() {
+    }
+    clickCall() {
+        this.onClickCall.emit();
+    }
+    clickMute() {
+        this.onClickMute.emit();
+    }
+}
+AudioControlsComponent.ɵfac = function AudioControlsComponent_Factory(t) { return new (t || AudioControlsComponent)(); };
+AudioControlsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: AudioControlsComponent, selectors: [["app-audio-controls"]], inputs: { onPhone: "onPhone", muted: "muted", disabled: "disabled" }, outputs: { onClickCall: "onClickCall", onClickMute: "onClickMute" }, decls: 4, vars: 9, consts: [[1, "controls"], [1, "btn", "btn-circle", 3, "ngClass", "click"], [1, "fa", "fa-fw", 3, "ngClass"], ["class", "btn btn-circle btn-default", 3, "click", 4, "ngIf"], [1, "btn", "btn-circle", "btn-default", 3, "click"]], template: function AudioControlsComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "button", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function AudioControlsComponent_Template_button_click_1_listener() { return ctx.clickCall(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "i", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](3, AudioControlsComponent_button_3_Template, 2, 4, "button", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](3, _c1, ctx.onPhone, !ctx.onPhone));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction2"](6, _c2, ctx.onPhone, !ctx.onPhone));
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.onPhone);
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["NgClass"], _angular_common__WEBPACK_IMPORTED_MODULE_1__["NgIf"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2F1ZGlvLWNvbnRyb2xzL2F1ZGlvLWNvbnRyb2xzLmNvbXBvbmVudC5jc3MifQ== */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AudioControlsComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-audio-controls',
+                templateUrl: './audio-controls.component.html',
+                styleUrls: ['./audio-controls.component.css']
+            }]
+    }], function () { return []; }, { onPhone: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], muted: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], disabled: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], onClickCall: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"],
+            args: ['onClickCall']
+        }], onClickMute: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"],
+            args: ['onClickMute']
+        }] }); })();
+
+
+/***/ }),
+
+/***/ "./src/app/dialer-input/dialer-input.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/dialer-input/dialer-input.component.ts ***!
+  \********************************************************/
+/*! exports provided: DialerInputComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DialerInputComponent", function() { return DialerInputComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+
+
+
+function DialerInputComponent_li_8_Template(rf, ctx) { if (rf & 1) {
+    const _r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialerInputComponent_li_8_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r3); const country_r1 = ctx.$implicit; const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](); return ctx_r2.selectCountry(country_r1); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "span");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+} if (rf & 2) {
+    const country_r1 = ctx.$implicit;
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassMapInterpolate1"]("flag flag-", country_r1.code, "");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"]("", country_r1.name, " (+", country_r1.cc, ")");
+} }
+class DialerInputComponent {
+    constructor() {
+        this.selectedCountryCode = '1';
+        this.localNumber = '';
+        this.showList = false;
+        this.onChangeNumber = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.countries = [
+            { name: 'United States', cc: '1', code: 'us' },
+            { name: 'Great Britain', cc: '44', code: 'gb' },
+            { name: 'Colombia', cc: '57', code: 'co' },
+            { name: 'Ecuador', cc: '593', code: 'ec' },
+            { name: 'Estonia', cc: '372', code: 'ee' },
+            { name: 'Germany', cc: '49', code: 'de' },
+            { name: 'Hong Kong', cc: '852', code: 'hk' },
+            { name: 'Ireland', cc: '353', code: 'ie' },
+            { name: 'Singapore', cc: '65', code: 'sg' },
+            { name: 'Spain', cc: '34', code: 'es' },
+            { name: 'Brazil', cc: '55', code: 'br' },
+            { name: 'India', cc: '91', code: 'in' },
+        ];
+    }
+    ngOnInit() {
+    }
+    toggleDropdown() {
+        this.showList = !this.showList;
+    }
+    changeNumber(event) {
+        this.localNumber = event.target.value;
+        this.emitChangeNumber();
+    }
+    selectCountry(country) {
+        this.selectedCountryCode = country.cc;
+        this.showList = false;
+        this.emitChangeNumber();
+    }
+    emitChangeNumber() {
+        this.onChangeNumber.emit({
+            countryCode: this.selectedCountryCode,
+            localNumber: this.localNumber,
+            fullNumber: `+${this.selectedCountryCode}${this.localNumber}`,
+            isValid: /^([0-9]|#|\*)+$/.test(this.localNumber.replace(/[-()\s]/g, ''))
+        });
+    }
+}
+DialerInputComponent.ɵfac = function DialerInputComponent_Factory(t) { return new (t || DialerInputComponent)(); };
+DialerInputComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DialerInputComponent, selectors: [["app-dialer-input"]], outputs: { onChangeNumber: "onChangeNumber" }, decls: 10, vars: 4, consts: [[1, "input-group", "input-group-sm"], [1, "input-group-btn"], ["type", "button", "data-toggle", "dropdown", "aria-haspopup", "true", "aria-expanded", "false", 1, "btn", "btn-default", "dropdown-toggle", 3, "ngClass", "click"], [1, "country-code"], [1, "fa", "fa-caret-down"], [1, "dropdown-menu", 3, "ngClass"], [4, "ngFor", "ngForOf"], ["type", "tel", "placeholder", "555-666-7777", 1, "form-control", 3, "keyup"], ["href", "#", 3, "click"]], template: function DialerInputComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialerInputComponent_Template_button_click_2_listener() { return ctx.toggleDropdown(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, " +");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "span", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "i", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](7, "ul", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](8, DialerInputComponent_li_8_Template, 5, 5, "li", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "input", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keyup", function DialerInputComponent_Template_input_keyup_9_listener($event) { return ctx.changeNumber($event); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", ctx.showList ? "show" : "");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.selectedCountryCode);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", ctx.showList ? "show" : "");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.countries);
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["NgClass"], _angular_common__WEBPACK_IMPORTED_MODULE_1__["NgForOf"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2RpYWxlci1pbnB1dC9kaWFsZXItaW5wdXQuY29tcG9uZW50LmNzcyJ9 */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](DialerInputComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-dialer-input',
+                templateUrl: './dialer-input.component.html',
+                styleUrls: ['./dialer-input.component.css']
+            }]
+    }], function () { return []; }, { onChangeNumber: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"],
+            args: ['onChangeNumber']
+        }] }); })();
+
+
+/***/ }),
+
+/***/ "./src/app/dialpad/dialpad.component.ts":
+/*!**********************************************!*\
+  !*** ./src/app/dialpad/dialpad.component.ts ***!
+  \**********************************************/
+/*! exports provided: DialpadComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DialpadComponent", function() { return DialpadComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+
+class DialpadComponent {
+    constructor() {
+        this.onDigitClick = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    ngOnInit() {
+    }
+    // Handle numeric buttons
+    clickDigit(digit) {
+        this.onDigitClick.emit(digit);
+    }
+}
+DialpadComponent.ɵfac = function DialpadComponent_Factory(t) { return new (t || DialpadComponent)(); };
+DialpadComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: DialpadComponent, selectors: [["app-dialpad"]], outputs: { onDigitClick: "onDigitClick" }, decls: 27, vars: 0, consts: [[1, "keys"], [1, "key-row"], [1, "btn", "btn-circle", "btn-default", 3, "click"], [1, "btn", "btn-circle", "btn-default"]], template: function DialpadComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_2_listener() { return ctx.clickDigit("1"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3, "1");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_4_listener() { return ctx.clickDigit("2"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](5, "2 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_6_listener() { return ctx.clickDigit("3"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](7, "3 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](8, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](9, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_9_listener() { return ctx.clickDigit("4"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](10, "4 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](11, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_11_listener() { return ctx.clickDigit("5"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](12, "5 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_13_listener() { return ctx.clickDigit("6"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](14, "6 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](15, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_16_listener() { return ctx.clickDigit("7"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](17, "7 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_18_listener() { return ctx.clickDigit("8"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](19, "8 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_20_listener() { return ctx.clickDigit("9"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "9 ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](23, "button", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "button", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function DialpadComponent_Template_button_click_24_listener() { return ctx.clickDigit("0"); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](25, "0");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](26, "button", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2RpYWxwYWQvZGlhbHBhZC5jb21wb25lbnQuY3NzIn0= */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](DialpadComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-dialpad',
+                templateUrl: './dialpad.component.html',
+                styleUrls: ['./dialpad.component.css']
+            }]
+    }], function () { return []; }, { onDigitClick: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"],
+            args: ['onDigitClick']
+        }] }); })();
 
 
 /***/ }),
@@ -678,6 +1008,54 @@ PopupComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
 
 /***/ }),
 
+/***/ "./src/app/statuslog/statuslog.component.ts":
+/*!**************************************************!*\
+  !*** ./src/app/statuslog/statuslog.component.ts ***!
+  \**************************************************/
+/*! exports provided: StatuslogComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StatuslogComponent", function() { return StatuslogComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+
+
+class StatuslogComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+}
+StatuslogComponent.ɵfac = function StatuslogComponent_Factory(t) { return new (t || StatuslogComponent)(); };
+StatuslogComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: StatuslogComponent, selectors: [["app-statuslog"]], inputs: { status: "status", summary: "summary" }, decls: 4, vars: 2, consts: [[1, "log"]], template: function StatuslogComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.status);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](ctx.summary);
+    } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3N0YXR1c2xvZy9zdGF0dXNsb2cuY29tcG9uZW50LmNzcyJ9 */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](StatuslogComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-statuslog',
+                templateUrl: './statuslog.component.html',
+                styleUrls: ['./statuslog.component.css']
+            }]
+    }], function () { return []; }, { status: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }], summary: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
+        }] }); })();
+
+
+/***/ }),
+
 /***/ "./src/environments/environment.ts":
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
@@ -739,7 +1117,7 @@ _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["platformBrowser"]().boot
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/rakesh_kumar/Testing/twilioDemo/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/rakesh_kumar/TwilioDemo/twilioDemo/src/main.ts */"./src/main.ts");
 
 
 /***/ })

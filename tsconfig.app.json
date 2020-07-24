@@ -10,6 +10,7 @@
   ],
   "include": [
     "src/**/*.d.ts",
-    "src/background.ts"
+    "src/background.ts",
+    "src/content.ts"
   ]
 }

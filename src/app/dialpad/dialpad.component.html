@@ -1,5 +1,8 @@
   <!-- DTMF Tone interface -->
   <div class="keys">
+    <div class="numberBox">
+      <input type="text" maxlength="10" placeholder="xxx-xxxxxxx"/>
+    </div>
     <div class="key-row">
       <button class="btn btn-circle btn-default" (click)="clickDigit('1')">1</button>
       <button class="btn btn-circle btn-default" (click)="clickDigit('2')">2
@@ -32,8 +35,16 @@
       </button>
     </div>
     <div class="key-row">
-      <button class="btn btn-circle btn-default"></button>
+      <button class="btn btn-circle btn-default">*</button>
       <button class="btn btn-circle btn-default" (click)="clickDigit('0')">0</button>
-      <button class="btn btn-circle btn-default"></button>
+      <button class="btn btn-circle btn-default">#</button>
+    </div>
+    <div class="key-row actionBtn">
+      <button class="btn btn-circle btn-default dial"><span><img src="../../assets/images/phone.png"></span></button>
+      <button class="btn btn-circle btn-default phoneClose"><span><img src="../../assets/images/phone.png"></span></button>
+      <button class="btn btn-circle btn-default play-pausebx"><span class="block-bx play"></span></button>
+    </div>
+    <div class="key-row actionBtn">
+      <button class="btn btn-circle btn-default play-pausebx"><span class="block-bx mute unmute"></span></button>
     </div>
   </div>

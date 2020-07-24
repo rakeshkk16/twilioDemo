@@ -1,0 +1,26 @@
+.keys{width: 100%; max-width: 190px;  padding:20px; margin: 0 auto; background: #fff;     box-shadow: 0 0 10px rgba(0,0,0,.2); border-radius: 3px;}
+.numberBox{width: 100%; text-align: center; margin: 0 0 5px 0; box-sizing: border-box;}
+.numberBox input{padding: 10px 0; text-align: center; display: block; font-size: 18px; border: none; width: 100%;}
+.numberBox input:focus{outline: none;}
+.keys .key-row{display: flex; align-items: center; justify-content: center; margin: 8px 0;}
+.keys .key-row button{background: #fff; height: 42px; width: 42px; border-radius: 50%; border: none !important; margin-right: 8px; color: #000; font-size: 18px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); transition: all .2s ease-in-out;}
+.keys .key-row button:hover, .keys .key-row button.active, .keys .key-row button:focus{background:#f9f9f9 !important; outline: none;}
+.keys .key-row button:last-child{margin-right: 0;}
+.keys .key-row.actionBtn button{background: none !important; transition: all .1s ease-in-out; cursor: pointer;}
+.keys .key-row.actionBtn button:hover{transform: scale(1.1);}
+.keys .key-row.actionBtn button>span{display: inline-block;}
+.keys .key-row.actionBtn button>span img{width: 100%;}
+.keys .key-row.actionBtn button.dial{background: #4cd964 !important;}
+.keys .key-row.actionBtn button.dial span{padding: 6px;}
+.keys .key-row.actionBtn button.dial span img{position: relative ; top: 2px;}
+.keys .key-row.actionBtn button.phoneClose{background: #cc0003 !important;}
+.keys .key-row.actionBtn button.phoneClose span{padding: 6px; transform: rotate(129deg);}
+
+.keys .key-row.actionBtn button.play-pausebx{box-shadow: none; padding: 0;}
+.keys .key-row.actionBtn button.play-pausebx .block-bx{height: 42px; width: 42px; overflow: hidden; }
+
+.keys .key-row.actionBtn button.play-pausebx .mute{background: url(../../assets/images/mute-unmute.png); background-position:-1px 0; background-repeat: no-repeat;}
+.keys .key-row.actionBtn button.play-pausebx .play{background: url(../../assets/images/palypause.png); background-position: -1px 0; background-repeat: no-repeat;}
+
+.keys .key-row.actionBtn button.play-pausebx .mute.unmute, .keys .key-row.actionBtn button.play-pausebx .play.pause{background-position: -44px 0;}
+

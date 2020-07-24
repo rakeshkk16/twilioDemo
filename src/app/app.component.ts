@@ -51,7 +51,21 @@ export class AppComponent implements OnInit {
   // </div>;
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       chrome.tabs.executeScript(
-        tabs[0].id, {code: 'document.body.innerHTML += "<div>My new content</div>"'}
+        // tabs[0].id, {code: `document.body.innerHTML +=  confirm("Incoming Call");`}
+        tabs[0].id, {code: `document.body.innerHTML +=   '<div class="commonPopUp" id="callingPopUp active">
+        <div class="popOverlay"></div>
+        <div class="popHolder confirmPopup">
+          <div class="closePopUp><span class="icon-cancel"></span></div>
+          <h3>Are you sure you want to remove all selections?</h3>
+          <div class="footerButton">
+            <button class="cancleButton>Cancel</button>
+            <button class="doneButton">
+              OK
+            </button>
+          </div>
+        </div>
+      </div>'`}
+       
         // { code: 'document.body.innerHTML +=' + '<img src="https://cdn.pixabay.com/photo/2015/02/24/15/41/dog-647528__340.jpg" alt="Girl in a jacket" width="500" height="600">' }
         //  +
         // `<div class="commonPopUp" id="callingPopUp active">
