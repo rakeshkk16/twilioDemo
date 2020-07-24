@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ApiRequests } from './shared/services/api-requests.service';
+declare const Twilio: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,10 +10,61 @@ export class AppComponent implements OnInit {
   title = 'extensionTest';
   color = 'red';
   showPopup = false;
+  onPhone = false;
+  muted = false;
+  isValidNumber = false;
+  logtext = '';
+  fullNumber: String = '';
+  log = '';
+  connection = null;
 
-  constructor() { }
+
+  constructor(public apiRequest: ApiRequests) {}
 
   ngOnInit(): void {
+    this.getToken();
+  }
+
+  public getToken() {
+    this.apiRequest.fetchToken().subscribe((data: any) => {
+      Twilio.Device.setup(data.token);
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  public sendDigit(digit) {
+    if (digit === 'D') {
+      if (this.fullNumber.length > 0) {
+        this.fullNumber = this.fullNumber.substring(0, this.fullNumber.length - 1);
+      }
+    } else {
+      this.fullNumber += digit;
+    }
+    console.log(this.fullNumber);
+    // Twilio.Device.activeConnection().sendDigits(digit);
+  }
+
+  public onCalling(number) {
+    this.getToken();
+    this.fullNumber = number;
+    this.toggleCall();
+  }
+
+  public onDisconnecting(event) {
+  }
+
+    // Make an outbound call with the current number,
+  // or hang up the current call
+  public toggleCall() {
+    if (this.connection === null) {
+      console.log('connection is null. Initiating the call with no. - ' + this.fullNumber);
+      const params = { "phoneNumber": this.fullNumber};
+      this.connection = Twilio.Device.connect(params);
+    } else {
+      this.connection = null;
+      Twilio.Device.disconnectAll();
+    }
   }
 
   public redirectToPage() {

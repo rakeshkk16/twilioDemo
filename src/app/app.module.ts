@@ -11,6 +11,11 @@ import { DialerInputComponent } from './dialer-input/dialer-input.component';
 import { AudioControlsComponent } from './audio-controls/audio-controls.component';
 import { DialpadComponent } from './dialpad/dialpad.component';
 import { StatuslogComponent } from './statuslog/statuslog.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { ApiRequests } from './shared/services/api-requests.service';
+import { HttpRequests } from './shared/services/http-requests.service';
+import { DataService } from './shared/services/data.service';
 
 @NgModule({
   declarations: [
@@ -25,9 +30,12 @@ import { StatuslogComponent } from './statuslog/statuslog.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ApiRequests, HttpRequests, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

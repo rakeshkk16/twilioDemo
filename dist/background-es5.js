@@ -33,12 +33,9 @@
 
             chrome.pageAction.show(id);
           });
-        }, {
-          url: [{
-            urlMatches: 'google.com'
-          }]
         });
-      });
+      }); // , { url: [{ urlMatches: 'google.com' }] }
+
       /***/
     }
   }, [["./src/background.ts", "runtime"]]]);
